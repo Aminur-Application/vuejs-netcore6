@@ -1,16 +1,24 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item value="true" v-for="(item, i) in items" :key="i" :to="item.link">
+     <v-app-bar
+        color="primary"
+        prominent
+      >
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>My files</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+        
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        bottom
+        temporary
+      >
+        <v-list>
+           <v-list-item value="true" v-for="(item, i) in items" :key="i" :to="item.link">
           <v-list-item-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-item-action>
@@ -18,20 +26,8 @@
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app :clipped-left="clipped" color="info" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-btn class="d-none d-lg-flex" icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>{{miniVariant ? 'mdi-chevron-right' : 'mdi-chevron-left'}}</v-icon>
-      </v-btn>
-      <v-btn class="d-none d-lg-flex" icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-web</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+        </v-list>
+      </v-navigation-drawer>
     
 
     <v-main>
@@ -39,7 +35,7 @@
     </v-main>
 
     <v-footer app>
-      <span>&nbsp;Software Ateliers&nbsp;&copy;&nbsp;2021</span>
+      <span>&nbsp;NetCore6 + vue 3 application</span>
     </v-footer>
   </v-app>
 </template>
