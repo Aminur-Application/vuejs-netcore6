@@ -57,7 +57,6 @@
 
 <script>
 // an example of a Vue Typescript component using Vue.extend
-import axios from 'axios'
 export default {
   name: "FetchData",
   data() {
@@ -86,11 +85,8 @@ export default {
     },
     async fetchWeatherForecasts() {
       try {
-        const response = await axios.get('api/WeatherForecast')
-        
+        const response = await this.$axios.get('api/WeatherForecast')
         this.forecasts = response.data
-        console.log(this.forecasts)
-        
       } catch (e) {
         this.showError = true
         console.log("stuff")

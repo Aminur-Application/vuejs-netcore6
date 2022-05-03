@@ -4,16 +4,17 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 import { loadFonts } from './plugins/webfontloader'
 // import dateFilter from '@/filters/date.filter'
 
-
 loadFonts()
+const axiosInstance = axios.create({
+  withCredentials: true,
+})
 
-createApp(App)
-  .use(router)
-  .use(store)
-  .use(vuetify)
-  .use(VueAxios, axios)
-  .mount('#app')
+const app = createApp(App)
+app.config.globalProperties.$axios = { ...axiosInstance }
+app.use(router).use(store).use(vuetify).mount('#app')
+
+
+
