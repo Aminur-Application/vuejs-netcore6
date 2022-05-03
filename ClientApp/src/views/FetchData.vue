@@ -6,32 +6,45 @@
           <h1>Weather forecast</h1>
           <p>This component demonstrates fetching data from the server.</p>
 
-          <v-data-table
-            :headers="headers"
-            :items="forecasts"
-            hide-default-footer
-            :loading="loading"
-            class="elevation-1"
-          >
-            <template v-slot:progress>
-              <v-progress-linear color="blue" indeterminate></v-progress-linear>
-            </template>
-            <template v-slot:[`item.date`]="{ item }">
-              <td>{{ item.date }}</td>
-            </template>
-            <template v-slot:[`item.temperatureC`]="{ item }">
-              <v-chip :color="getColor(item.temperatureC)" dark>{{ item.temperatureC }}</v-chip>
-            </template>
-          </v-data-table>
+          <v-table theme="dark">
+            <thead>
+              <tr>
+                <th class="text-left">
+                  Summary
+                </th>
+                <th class="text-left">
+                  temperatureC
+                </th>
+                <th class="text-left">
+                  TemperatureF
+                </th>
+                <th class="text-left">
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="item in forecasts"
+                :key="item.summary"
+              >
+                <td>{{ item.summary }}</td>
+                <td>{{ item.temperatureC }}</td>
+                <td>{{ item.temperatureF }}</td>
+                <td>{{ item.date }}</td>
+
+              </tr>
+            </tbody>
+          </v-table>
         </v-col>
       </v-row>
     </v-slide-y-transition>
 
-    <v-alert :value="showError" type="error" >
+    <v-alert :value="showError" type="error" v-if="showError">
       This is an error alert.
     </v-alert>
 
-    <v-alert :value="showError" type="warning">
+    <v-alert :value="showError" type="warning" v-if="showError">
       Are you sure you're using ASP.NET Core endpoint? (default at
       <a href="http://localhost:5000/fetch-data">http://localhost:5000</a>)
       <br />
@@ -44,7 +57,7 @@
 
 <script>
 // an example of a Vue Typescript component using Vue.extend
-
+import axios from 'axios'
 export default {
   name: "FetchData",
   data() {
@@ -73,9 +86,11 @@ export default {
     },
     async fetchWeatherForecasts() {
       try {
-        const response = await this.$axios.get<[]>('api/WeatherForecast')
-        console.log(this.forecasts)
+        const response = await axios.get('api/WeatherForecast')
+        
         this.forecasts = response.data
+        console.log(this.forecasts)
+        
       } catch (e) {
         this.showError = true
         console.log("stuff")
