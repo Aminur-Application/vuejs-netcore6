@@ -1,6 +1,6 @@
 <template>
   <v-app>
-     <v-app-bar
+     <v-app-bar app
         color="primary"
         prominent
       >
@@ -10,12 +10,12 @@
 
         <v-spacer></v-spacer>
         
+        
       </v-app-bar>
 
-      <v-navigation-drawer
+      <v-navigation-drawer app
         v-model="drawer"
         bottom
-        temporary
       >
         <v-list>
            <v-list-item value="true" v-for="(item, i) in items" :key="i" :to="item.link">
@@ -31,7 +31,9 @@
     
 
     <v-main>
-      <router-view />
+      <v-container fluid>
+        <router-view />
+      </v-container>
     </v-main>
 
     <v-footer app>

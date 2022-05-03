@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  
     <v-slide-y-transition mode="out-in">
       <v-row>
         <v-col>
@@ -9,7 +9,7 @@
         </v-col>
       </v-row>
     </v-slide-y-transition>
-  </v-container>
+ 
 </template>
 
 <script>

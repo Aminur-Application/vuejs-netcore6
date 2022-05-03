@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  
     <v-slide-y-transition mode="out-in">
       <v-row>
         <v-col>
@@ -52,7 +52,7 @@
       <a href="http://localhost:8080/fetch-data">http://localhost:8080</a>) without devServer proxy
       settings in vue.config.js file.
     </v-alert>
-  </v-container>
+
 </template>
 
 <script>
